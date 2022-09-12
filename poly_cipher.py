@@ -6,28 +6,20 @@
 ## algorithm to take txt and encrpyt it
 def text_to_cipher(userInput, encryptKey):
     key = list(encryptKey)
-    if len(userInput) == len(key):
-        return(key)
-    else:
-        for i in range(len(userInput) - len(key)):
-            key.append(key[i % len(key)])
-    key = "".join(key)
+    #length of input - length of key
+    #append the key at ith pos. mod by length of the key
+    for i in range(len(userInput) - len(key)):
+        key.append(key[i % len(key)])
+    key = "".join(key) #join the new appended key with old key
     cipherText =[]
+    #take user input letter by letter and + with the ith pos of key +26
+    #then mod the whole thing by 26 to get encrypted letter starting from 'A'
+    #add the characters to the array cipherText array and return the char value
     for i in range(len(userInput)):
         a = (ord(userInput[i]) + ord(key[i]) + 26) % 26
         a += ord('A')
         cipherText.append(chr(a))
     return("".join(cipherText))
-
-##############################################################################
-## take cipher and turn to text
-def cipher_to_text(cipherText, key):
-    originalText = []
-    for i in range(len(cipherText)):
-        a = (ord(cipherText[i]) + ord(key[i]) + 26) % 26
-        a += ord('A')
-        cipherText.append(chr(a))
-    return("".join(originalText))
 
 ##############################################################################
 ## main
@@ -44,3 +36,6 @@ encryptKey = input("enter the key for encryption: ")
 
 print("\n")
 print("encrypted text: ", text_to_cipher(userInput,encryptKey))
+
+###############################################################################
+## end of main
